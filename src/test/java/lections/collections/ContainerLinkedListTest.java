@@ -27,4 +27,16 @@ public class ContainerLinkedListTest {
         iterator.next();
         Assert.assertFalse(iterator.hasNext());
     }
+
+    @Test
+    public void whenUsedRemoveByValueAndRemoveByIndex() {
+        ContainerLinkedList<Integer> containerLinkedList = new ContainerLinkedList<>();
+        containerLinkedList.add(10);
+        containerLinkedList.add(20);
+        containerLinkedList.add(30);
+        containerLinkedList.remove(0);
+        Assert.assertThat(20, Is.is(containerLinkedList.get(0)));
+        containerLinkedList.remove(new Integer(20));
+        Assert.assertThat(30, Is.is(containerLinkedList.get(0)));
+    }
 }
