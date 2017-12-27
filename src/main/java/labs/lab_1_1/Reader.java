@@ -7,15 +7,16 @@ import org.jsoup.nodes.Element;
 import java.io.*;
 import java.util.Arrays;
 
-public class Reader implements ReadableResourse {
+public class Reader implements ReadableResourse  {
 
-    public String nameResourse;
+    public String string;
 
     public Reader(String nameResourse) {
-        this.nameResourse = nameResourse;
+        this.string = nameResourse;
+
     }
 
-    public  String readFile(String string) {
+    public String readFile() {
         BufferedReader reader = null;
         StringBuilder sB = new StringBuilder();
         try {
@@ -33,25 +34,22 @@ public class Reader implements ReadableResourse {
         return sB.toString();
     }
 
-    public  String readUrl(String url) {
+    public String readUrl() {
         Document doc = null;
         try {
-            doc = Jsoup.connect(url).get();
+            doc = Jsoup.connect(string).get();
         } catch (IOException e) {
            return "";
         }
         Element body = doc.body();
         String bodyString = body.toString();
-        String result = returnOnlyKirilliza(bodyString);
-        return result;
-    }
-
-    private static String returnOnlyKirilliza(String bodyString) {
-        String[] strings = bodyString.split("[^А-Яа-я]");
+        String[] strings = bodyString.split("[^А-Яа-я0-9]");
         StringBuilder result = new StringBuilder();
-        Arrays.stream(strings).forEach(s -> {
-            if (!s.equals(""))
-            result.append(s + " ");});
+        for (String s: strings) {
+            if (!s.equals("")) {
+                result.append(s + " ");
+            }
+        }
         return result.toString();
     }
 }

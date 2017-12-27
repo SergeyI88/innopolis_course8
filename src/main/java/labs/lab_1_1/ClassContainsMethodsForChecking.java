@@ -13,6 +13,6 @@ public class ClassContainsMethodsForChecking {
         }
 
         public static boolean readResource(String string) {
-            return string.matches("[А-Яа-я ]+");
+            return string.matches("[А-Яа-я0-9 ]+");
         }
 }

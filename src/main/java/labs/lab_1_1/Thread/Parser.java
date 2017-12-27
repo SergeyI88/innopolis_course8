@@ -1,9 +1,8 @@
-package labs.lab_1_1;
+package labs.lab_1_1.Thread;
 
-import labs.lab_1_1.Thread.ThreadOnResourse;
-import labs.lab_1_1.Thread.ThreadValidator;
 
-import java.util.ArrayList;
+import labs.lab_1_1.Resourse;
+
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -33,8 +32,11 @@ public class Parser {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(queueWasCheckingresourse);
         while (!queueWasCheckingresourse.isEmpty() && isStop) {
-            service.submit(new ThreadOnResourse(this, queueWasCheckingresourse.poll(), service));
+            service.execute(new ThreadOnResourse(queueWasCheckingresourse.poll(), service));
+
         }
+      //  new ThreadOnResourse(queueWasCheckingresourse.poll(), service).run();
     }
 }

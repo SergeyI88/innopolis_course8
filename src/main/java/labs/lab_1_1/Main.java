@@ -1,5 +1,7 @@
 package labs.lab_1_1;
 
+import labs.lab_1_1.Thread.Parser;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
